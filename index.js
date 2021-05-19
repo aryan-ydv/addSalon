@@ -5,7 +5,7 @@ let AddSalon = require("./models/addSalon");
 const app=express();
 app.use(express.json());
 
-app.get("/get", (req, res) => {
+app.get("/", (req, res) => {
     AddSalon.find()
     .then((exercise) => {
       res.json(exercise);
