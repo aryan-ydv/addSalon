@@ -10,7 +10,7 @@ require("dotenv").config();
 app.use(express.json());
 
 //to see all our data route
-app.get("/get", (req, res) => {
+app.get("/", (req, res) => {
     AddSalon.find()
     .then((exercise) => {
       res.json(exercise);
