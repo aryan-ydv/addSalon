@@ -30,16 +30,15 @@ const addSalonSchema=new Schema({
     address: {type: String},
     salonWebsite: {type: String},
     location: {
-        type: { type: String },
-        coordinates: [Number]
-      }
-   
-
-
+        lat:{type:Number},
+        long: {type:Number}
+      },
 });
 
  const Salon =mongoose.model('addSalon',addSalonSchema);
  module.exports=Salon;
+
+ 
 
 
 
