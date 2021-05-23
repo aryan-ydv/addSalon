@@ -1,6 +1,6 @@
 const express =require("express");
 require("./db/config");
-
+const cors=require("cors");
 const port =process.env.PORT || 3000;
 let AddSalon = require("./models/addSalon");
 const app=express();
@@ -8,6 +8,7 @@ require("dotenv").config();
 
 
 app.use(express.json());
+app.use(cors());
 
 //to see all our data route
 app.get("/", (req, res) => {
@@ -79,7 +80,7 @@ app.post("/addsalon", (req, res) => {
         beardGroomingGentsServices,
         address,
         salonWebsite,
-        location,
+        location,    //28
       });
       addsalon.save()
       .then(()=>{
@@ -94,3 +95,5 @@ app.post("/addsalon", (req, res) => {
 app.listen(port,()=>{
     console.log(`app is running on ${port}`);
 })
+
+
