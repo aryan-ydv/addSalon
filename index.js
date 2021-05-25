@@ -7,7 +7,7 @@ const app = express();
 require("dotenv").config();
 
 //to see all our data route
-app.get("/get", (req, res) => {
+app.get("/", (req, res) => {
   AddSalon.find()
     .then((exercise) => {
       res.json(exercise);
