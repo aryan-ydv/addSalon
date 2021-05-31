@@ -1,6 +1,5 @@
 const mongoose=require("mongoose");
 const Schema=mongoose.Schema;
-const validator = require('mongoose-validator')
 
 const signupSchema=new Schema({
     email: {
@@ -10,11 +9,17 @@ const signupSchema=new Schema({
       unique: true
         
       },
+      phoneNumber:{
+        type: Number,
+        required: true,
+        unique: true,
+      },
    password: {
     type: String,
     required: true
   },
-});
+ 
+}, {strict: true});
 
 
  const Signup =mongoose.model('signup',signupSchema);

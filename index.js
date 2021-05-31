@@ -27,8 +27,7 @@ app.get("/", (req, res) => {
 
 //specific-field rendering api
 app.get("/renderData", (req, res) => {
-
-  AddSalon.find({}, {_id: 1, salonName : 1, GentsServices : 1, LadiesServices: 1 })
+  AddSalon.find({}, {_id: 1, salonName : 1, GentsServices : 1, LadiesServices: 1 ,facilities:1})
   .then((exercise) => {
     res.json(exercise);
   })
@@ -107,3 +106,72 @@ app.post("/addsalon", (req, res) => {
 app.listen(port, () => {
   console.log(`app is running on ${port}`);
 });
+
+
+// const express = require("express");
+// const bodyparser=require("body-parser");
+// const app = express();
+// const exphbs=require("express-handlebars");
+// var messagebird=require("messagebird")('QEMFYz5QaOuxa1EhHJ3Hs8NmS')
+// app.use(express.json());
+
+// app.engine('handlebars' ,exphbs({defaultLayout: 'main'}));
+// app.set('view engine', 'handlebars');
+// app.use(bodyparser.urlencoded({extended: true}))
+
+// app.get("/",(req,res)=>{
+//   res.render('step1')
+// })
+
+// app.post("/step2",(req,res)=>{
+//     var number=req.body.number;
+
+//     messagebird.verify.create(number,{
+//         template: 'your %token is here'
+//     }, function(err,response){
+//         if(err){
+//             console.log(err)
+//             res.render('step1',{
+//               error: err.errors[0].description
+//             })
+//         }
+//         else{
+//             console.log(response);
+//             res.render('step2',{
+//               id: response.id
+//             })
+//         }
+//     })
+// })
+
+// // app.post("/step3",(req,res)=>{
+// //     var id=req.body.id;
+// //     var token=req.body.token;
+
+// //  messagebird.verify.verify(id,token,function(err,response){
+// //      if(err){
+// //          res.render('step2',{
+// //            error: err.errors[0].description,
+// //            id :id
+// //          });
+// //      }
+// //      else{
+// //          res.render('stpe3');
+// //      }
+// //  });
+// //     // messagebird.verify.create(number,{
+// //     //     message: "your token is here"
+// //     // }, function(err,response){
+// //     //     if(err){
+// //     //         console.log(err)
+// //     //         res.send(err)
+// //     //     }
+// //     //     else{
+// //     //         console.log(response);
+// //     //         res.send(response.id)
+// //     //     }
+// //     // })
+// // });
+// // app.listen(5001,()=>{
+// //   console.log("running")
+// // });

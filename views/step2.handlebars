@@ -1,0 +1,10 @@
+{{#if error}}
+<p>{{error}}</p>
+{{/if}}
+<p>we have sent you verification code</p>
+<p>please  enter the code</p>
+<form method="POST"  action="/step3">
+  <input type="hidden" name="id" value={{id}}>
+  <input type="text" name="token" >
+  <input type="submit" value="check code" >
+</form>
