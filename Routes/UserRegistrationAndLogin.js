@@ -3,6 +3,7 @@ const cors = require("cors");
 const User = require("../models/signup");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 const app = express();
 
 app.use(express.json());
@@ -10,17 +11,18 @@ app.use(cors());
 
 // const JWT_SECRET = "sbjkdNDJJalsanxxmxZmxkdqmmxl,xslcmascms;sXMAS";
 app.post("/login", async (req, res) => {
+  // console.log(process.env.JWT_SECRET);
   const { email, phoneNumber, password } = req.body;
-  const userlogin = await User.findOne({ email ,phoneNumber}).lean();
+  const userlogin = await User.findOne({ email, phoneNumber }).lean();
 
   if (!email) {
     return res.json({ status: "error", error: "Invalid Email/Passowrd" });
   }
-   
-  if(! phoneNumber){
+
+  if (!phoneNumber) {
     return res.json({ status: "error", error: "Invalid phoneNumber/Passowrd" });
   }
-  if (await bcrypt.compare(password, userlogin.password)) {
+  if (await bcrypt.compare(String(password), userlogin.password)) {
     const token = jwt.sign(
       {
         id: userlogin._id,
@@ -32,45 +34,48 @@ app.post("/login", async (req, res) => {
 
     return res.json({ status: "ok", token: token });
   }
-  return res.json({ status: "error", error: "Invalid Email/PhoneNumber/Passowrd" });
+  return res.json({
+    status: "error",
+    error: "Invalid Email/PhoneNumber/Passowrd",
+  });
 });
 
-//signup
+//signup-route
 app.post("/signup", async (req, res) => {
   const { email, phoneNumber, password: plaintextpassword } = req.body;
 
   const oldUser = await User.findOne({ email: email });
-  
+
   if (oldUser) {
     return res.json({
       status: "error",
       error: "Email Already Exist",
     });
-  
-  } 
-  const oldphonenumber=await User.findOne({phoneNumber: phoneNumber});
+  }
+  const oldphonenumber = await User.findOne({ phoneNumber: phoneNumber });
   if (oldphonenumber) {
     return res.json({
       status: "error",
       error: "PhoneNumber Already Exist",
     });
-  }
-  else {
-
+  } else {
     if (!email || typeof email !== "string") {
       return res.json({ status: "error", error: "Invalid Email" });
     }
-    if (!plaintextpassword || typeof plaintextpassword !== 'number') {
+    if (!plaintextpassword || typeof plaintextpassword !== "number") {
       return res.json({ status: "error", error: "Invalid password" });
     }
-    if (!phoneNumber || typeof phoneNumber !== 'number') {
-
+    if (!phoneNumber || typeof phoneNumber !== "number") {
       return res.json({
-         status: 401,
-       message: "Invalid phoneNumber it should be Number type" });
+        status: 401,
+        message: "Invalid phoneNumber it should be Number type",
+      });
     }
-    if (!plaintextpassword ) {
-      return res.json({ status: "error", error: "passoword should be entered" });
+    if (!plaintextpassword) {
+      return res.json({
+        status: "error",
+        error: "passoword should be entered",
+      });
     }
 
     if (String(plaintextpassword).length !== 6) {
@@ -79,8 +84,8 @@ app.post("/signup", async (req, res) => {
         error: "password should be exact 6 Numbers!",
       });
     }
-    
-    if (String(phoneNumber).length !==10) {
+
+    if (String(phoneNumber).length !== 10) {
       return res.json({
         status: 402,
         error: "phoneNumber is not valid, should be atleast 10 Numbers!",
