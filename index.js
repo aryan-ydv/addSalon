@@ -107,7 +107,10 @@ app.listen(port, () => {
   console.log(`app is running on ${port}`);
 });
 
-
+function generate() {
+  return Math.floor(Math.floor(100000 + Math.random() * 900000));
+}
+console.log(generate());
 // const express = require("express");
 // const bodyparser=require("body-parser");
 // const app = express();

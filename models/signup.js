@@ -19,7 +19,7 @@ const signupSchema=new Schema({
     required: true
   },
  
-}, {strict: true});
+}, {strict: true},{timestamps: true});
 
 
  const Signup =mongoose.model('signup',signupSchema);

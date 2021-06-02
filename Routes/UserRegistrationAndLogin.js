@@ -4,30 +4,26 @@ const User = require("../models/signup");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-// const JWT_SECRET = "sbjkdNDJJalsanxxmxZmxkdqmmxl,xslcmascms;sXMAS";
 app.post("/login", async (req, res) => {
   // console.log(process.env.JWT_SECRET);
-  const { email, phoneNumber, password } = req.body;
-  const userlogin = await User.findOne({ email, phoneNumber }).lean();
+  const { email,  password } = req.body;
+  const userlogin = await User.findOne({ email }).lean();
 
   if (!email) {
     return res.json({ status: "error", error: "Invalid Email/Passowrd" });
   }
 
-  if (!phoneNumber) {
-    return res.json({ status: "error", error: "Invalid phoneNumber/Passowrd" });
-  }
   if (await bcrypt.compare(String(password), userlogin.password)) {
     const token = jwt.sign(
       {
         id: userlogin._id,
         email: userlogin.email,
-        phoneNumber: userlogin.phoneNumber,
       },
       process.env.JWT_SECRET
     );
@@ -36,9 +32,10 @@ app.post("/login", async (req, res) => {
   }
   return res.json({
     status: "error",
-    error: "Invalid Email/PhoneNumber/Passowrd",
+    error: "Invalid Email/Passowrd",
   });
 });
+
 
 //signup-route
 app.post("/signup", async (req, res) => {
@@ -62,15 +59,15 @@ app.post("/signup", async (req, res) => {
     if (!email || typeof email !== "string") {
       return res.json({ status: "error", error: "Invalid Email" });
     }
-    if (!plaintextpassword || typeof plaintextpassword !== "number") {
-      return res.json({ status: "error", error: "Invalid password" });
-    }
-    if (!phoneNumber || typeof phoneNumber !== "number") {
-      return res.json({
-        status: 401,
-        message: "Invalid phoneNumber it should be Number type",
-      });
-    }
+    // if (!plaintextpassword || typeof plaintextpassword !== "string") {
+    //   return res.json({ status: "error", error: "Invalid password" });
+    // }
+    // if (!phoneNumber || typeof phoneNumber !== "string") {
+    //   return res.json({
+    //     status: 401,
+    //     message: "Invalid phoneNumber it should be Number type",
+    //   });
+    // }
     if (!plaintextpassword) {
       return res.json({
         status: "error",
@@ -78,7 +75,7 @@ app.post("/signup", async (req, res) => {
       });
     }
 
-    if (String(plaintextpassword).length !== 6) {
+    if (plaintextpassword.length !== 6) {
       return res.json({
         status: "error",
         error: "password should be exact 6 Numbers!",
