@@ -18,6 +18,10 @@ const signupSchema=new Schema({
     type: String,
     required: true
   },
+  resetLink:{
+    type: String,
+    default: '',
+  },
  
 }, {strict: true},{timestamps: true});
 

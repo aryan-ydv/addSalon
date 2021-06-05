@@ -12,11 +12,19 @@ app.use(cors());
 
 app.post("/login", async (req, res) => {
   // console.log(process.env.JWT_SECRET);
-  const { email,  password } = req.body;
-  const userlogin = await User.findOne({ email }).lean();
-
-  if (!email) {
-    return res.json({ status: "error", error: "Invalid Email/Passowrd" });
+  const { emailOrPhoneNumber,  password } = req.body;
+  let userlogin = await User.findOne({ email : emailOrPhoneNumber }).lean();
+  if(!userlogin){
+    if(emailOrPhoneNumber.match(/^(\+\d{1,3}[- ]?)?\d{10}$/) && ! (emailOrPhoneNumber.match(/0{5,}/)) ){
+      userlogin = await User.findOne({  phoneNumber : emailOrPhoneNumber }).lean();
+    }
+  }
+   
+  if(!userlogin){
+    return res.status(400).json({
+      status: "error",
+      error: "Invalid Email/phoneNumber/Passowrd",
+    });
   }
 
   if (await bcrypt.compare(String(password), userlogin.password)) {
@@ -24,15 +32,16 @@ app.post("/login", async (req, res) => {
       {
         id: userlogin._id,
         email: userlogin.email,
+        phoneNumber: userlogin.phoneNumber,
       },
       process.env.JWT_SECRET
     );
 
-    return res.json({ status: "ok", token: token });
+    return res.status(200).json({ status: "ok", token: token });
   }
-  return res.json({
+  return res.status(401).json({
     status: "error",
-    error: "Invalid Email/Passowrd",
+    error: "Invalid Email/phoneNumber/Passowrd",
   });
 });
 
@@ -44,14 +53,14 @@ app.post("/signup", async (req, res) => {
   const oldUser = await User.findOne({ email: email });
 
   if (oldUser) {
-    return res.json({
+    return res.status(400).json({
       status: "error",
       error: "Email Already Exist",
     });
   }
   const oldphonenumber = await User.findOne({ phoneNumber: phoneNumber });
   if (oldphonenumber) {
-    return res.json({
+    return res.status(400).json({
       status: "error",
       error: "PhoneNumber Already Exist",
     });
@@ -69,21 +78,21 @@ app.post("/signup", async (req, res) => {
     //   });
     // }
     if (!plaintextpassword) {
-      return res.json({
+      return res.status(400).json({
         status: "error",
         error: "passoword should be entered",
       });
     }
 
     if (plaintextpassword.length !== 6) {
-      return res.json({
+      return res.status(400).json({
         status: "error",
         error: "password should be exact 6 Numbers!",
       });
     }
 
     if (String(phoneNumber).length !== 10) {
-      return res.json({
+      return res.status(400).json({
         status: 402,
         error: "phoneNumber is not valid, should be atleast 10 Numbers!",
       });
@@ -106,7 +115,7 @@ app.post("/signup", async (req, res) => {
         });
     } catch (error) {
       if (error.code === 11000) {
-        return res.json({ status: "error", error: "email alraedy exits!" });
+        return res.status(400).json({ status: "error", error: "email alraedy exits!" });
       }
       throw error;
     }

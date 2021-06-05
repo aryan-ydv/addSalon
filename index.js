@@ -5,13 +5,43 @@ const port = process.env.PORT || 3000;
 let AddSalon = require("./models/addSalon");
 const Signup = require("./models/signup");
 const UserRegistrationAndLogin=  require("./Routes/UserRegistrationAndLogin");
+const signupwithEmail=require("./Routes/signupWithEmail");
+const Salon = require("./models/salon");
+const passport=require("passport");
+require("./Routes/passport-setup")
+require("dotenv").config()
 const app = express();
 
+//middlewares
 app.use(express.json());
 app.use(cors());
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 //routes
 app.use('/UserRegistrationAndLogin',UserRegistrationAndLogin);
+app.use("/signupwithmail",signupwithEmail)
+app.use("/salondata",Salon);
+
+
+//google-api
+app.get("/google",passport.authenticate('google',{scope:['profile','email']}))
+
+//callback-goole
+app.get("/google/callback",passport.authenticate('google',{failureRedirect:'/failed'})
+,function(req,res){
+   res.send("welcome you have succefully signup!")
+})
+
+
 
 //to see all our data route
 app.get("/", (req, res) => {
@@ -40,8 +70,8 @@ app.get("/renderData", (req, res) => {
 
 //search-field  api
 // app.get("/search/:address", (req, res) => {
-//   // const searchField=req.params.salonName;
-//   // AddSalon.find({salonName: {$regex: searchField ,options: '$i'}})
+//   const searchField=req.params.salonName;
+//    AddSalon.find({salonName: {$regex: searchField ,options: '$i'}})
 //   var regex=new RegExp(req.params.address, 'i');
 //     AddSalon.find({address: regex})
 //     .then(result => {
@@ -107,10 +137,12 @@ app.listen(port, () => {
   console.log(`app is running on ${port}`);
 });
 
-function generate() {
-  return Math.floor(Math.floor(100000 + Math.random() * 900000));
-}
-console.log(generate());
+// function generate() {
+//   return Math.floor(Math.floor(100000 + Math.random() * 900000));
+// }
+// console.log(generate());
+
+
 // const express = require("express");
 // const bodyparser=require("body-parser");
 // const app = express();
