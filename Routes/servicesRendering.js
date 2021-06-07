@@ -1,6 +1,6 @@
 const express=require("express");
 const app=express()
-const Salon =require("../models/salon");
+const addSalon =require("../models/addSalon");
 
 //services-rendering
 app.get("/search", async (req, res) => {
