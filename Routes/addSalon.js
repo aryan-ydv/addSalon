@@ -1,9 +1,99 @@
 const express = require("express");
 let AddSalon = require("../models/addSalon");
 const app=express()
+app.use(express.json());
 
- app.use(express.json());
+//services-rendering
+app.get("/ladies/:service", async (req, res) => {
+    const service = req.params.service;
 
+    if(service === 'hair-styling'){
+        const hairStylingServices = await AddSalon.find();
+        let data = hairStylingServices.filter((service)=>{
+            return (
+                service.ladiesServices.hairStyling.hairCut ||
+                service.ladiesServices.hairStyling.ironing ||
+                service.ladiesServices.hairStyling.globalColouring ||
+                service.ladiesServices.hairStyling.blowDry ||
+                service.ladiesServices.hairStyling.rootTouchUp ||
+                service.ladiesServices.hairStyling.shampooConditioning ||
+                service.ladiesServices.hairStyling.headMassage ||
+                service.ladiesServices.hairStyling.rollerSetting ||
+                service.ladiesServices.hairStyling.oiling
+            )
+        });
+        res.json({ data });
+    }
+
+    if(service === 'makeUp'){
+        const makeUpServices = await AddSalon.find();
+        let data = makeUpServices.filter((service)=>{
+            return (
+                service.ladiesServices.makeUp.partyMakeUp ||
+                service.ladiesServices.makeUp.engagementMakeUp ||
+                service.ladiesServices.makeUp.bridalReceptionMakeUp ||
+                service.ladiesServices.makeUp.baseMakeUp ||
+                service.ladiesServices.makeUp.eyeMakeUp
+            )
+        });
+        res.json({ data });
+    }
+
+    if(service === 'hairTexture'){
+        const hairTextureServices = await AddSalon.find();
+        let data = hairTextureServices.filter((service)=>{
+            return (
+                service.ladiesServices.hairTexture.rebonding ||
+                service.ladiesServices.hairTexture.perming ||
+                service.ladiesServices.hairTexture.keratin ||
+                service.ladiesServices.hairTexture.colourProtection ||
+                service.ladiesServices.hairTexture.smoothening
+            )
+        });
+        res.json({ data });
+    }
+
+    if(service === 'hairTreatments'){
+        const hairTreatmentsServices = await AddSalon.find();
+        let data = hairTreatmentsServices.filter((service)=>{
+            return (
+                service.ladiesServices.hairTreatments.spaTreatments ||
+                service.ladiesServices.hairTreatments.volumizing ||
+                service.ladiesServices.hairTreatments.advancedHairMoisturising ||
+                service.ladiesServices.hairTreatments.scalpTreatments
+            )
+        });
+        res.json({ data });
+    }
+
+    if(service === 'facialsRituals'){
+        const facialsRitualsServices = await AddSalon.find();
+        let data = facialsRitualsServices.filter((service)=>{
+            return (
+                service.ladiesServices.facialsRituals.bleach ||
+                service.ladiesServices.facialsRituals.luxuryFacialsRituals ||
+                service.ladiesServices.facialsRituals.cleanUps ||
+                service.ladiesServices.facialsRituals.bodyPolishingRejuvenation ||
+                service.ladiesServices.facialsRituals.threading
+            )
+        });
+        res.json({ data });
+    }
+
+    if(service === 'nailCare'){
+        const nailCareServices = await AddSalon.find();
+        let data = nailCareServices.filter((service)=>{
+            return (
+                service.ladiesServices.nailCare.nailPaint ||
+                service.ladiesServices.nailCare.nailArt ||
+                service.ladiesServices.nailCare.nailFilling
+            )
+        });
+        res.json({ data });
+    }
+
+    res.json({ message: "No Data Found", data:[] });
+});
 
 
 app.post("/", (req, res) => {
@@ -46,7 +136,7 @@ app.post("/", (req, res) => {
     addsalon
       .save()
       .then(() => {
-        res.json({ message: "salon data is added!" });
+        res.json({ message: "salon data is added!", data:addsalon });
       })
       .catch((err) => {
         res.json(err);
@@ -55,33 +145,6 @@ app.post("/", (req, res) => {
 
 
   
-//services-rendering
-app.get("/search", async (req, res) => {
-    let gender = req.query.gender;
-    let category = req.query.category;
-    let service = req.query.service;
-    console.log(gender, category, service);
-    // console.log(genderType);
-    // console.log(category);
-    // res.send("skjflksjflks");
-    // let hairStyles = new Salon({
-    //   gentsServices: {
-    //     hairStyle: ["style4", "style5", "style6"],
-    //   },
-    // });
-  
-    // await hairStyles.save();
-  
-    if (gender == "male" && category == "hairStyling") {
-      const salons = await Salon.find({
-        "gentsServices.hairStyling": service,
-      });
-      // const salons = await Salon.findById("60b93a956a4ce707d9c3a1a4");
-      console.log(salons);
-    }
-  
-    res.json({ message: "success" });
-  });
 
   
   module.exports=app;
