@@ -1,45 +1,46 @@
 const express = require("express");
 require("./db/config");
 const cors = require("cors");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 let AddSalon = require("./models/addSalon");
 const Signup = require("./models/signup");
 const UserRegistrationAndLogin=  require("./Routes/UserRegistrationAndLogin");
 const signupwithEmail=require("./Routes/signupWithEmail");
 const Salon = require("./models/salon");
-const passport=require("passport");
+// const passport=require("passport");
 require("./Routes/passport-setup")
+const googlesignupApi = require("./Routes/googlesignupApi")
 require("dotenv").config()
 const app = express();
 
 //middlewares
 app.use(express.json());
 app.use(cors());
-app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.initialize())
+// app.use(passport.session())
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+// passport.serializeUser(function(user, done) {
+//   done(null, user);
+// });
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
+// passport.deserializeUser(function(user, done) {
+//   done(null, user);
+// });
 
 //routes
 app.use('/UserRegistrationAndLogin',UserRegistrationAndLogin);
 app.use("/signupwithmail",signupwithEmail)
 app.use("/salondata",Salon);
+app.use("/api",googlesignupApi)
 
+// //google-api
+// app.get("/google",passport.authenticate('google',{scope:['profile','email']}))
 
-//google-api
-app.get("/google",passport.authenticate('google',{scope:['profile','email']}))
-
-//callback-goole
-app.get("/google/callback",passport.authenticate('google',{failureRedirect:'/failed'})
-,function(req,res){
-   res.send("welcome you have succefully signup!")
-})
+// //callback-goole
+// app.get("/google/callback",passport.authenticate('google',{failureRedirect:'/failed'})
+// ,function(req,res){
+//    res.send("welcome you have succefully signup!")
+// })
 
 
 
