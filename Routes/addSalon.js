@@ -22,10 +22,10 @@ app.get("/ladies/:service", async (req, res) => {
                 service.ladiesServices.hairStyling.oiling
             )
         });
-        res.json({ data });
+        res.status(200).json({ data });
     }
 
-    if(service === 'makeUp'){
+    if(service === 'make-up'){
         const makeUpServices = await AddSalon.find();
         let data = makeUpServices.filter((service)=>{
             return (
@@ -36,10 +36,10 @@ app.get("/ladies/:service", async (req, res) => {
                 service.ladiesServices.makeUp.eyeMakeUp
             )
         });
-        res.json({ data });
+        res.status(200).json({ data });
     }
 
-    if(service === 'hairTexture'){
+    if(service === 'hair-texture'){
         const hairTextureServices = await AddSalon.find();
         let data = hairTextureServices.filter((service)=>{
             return (
@@ -50,10 +50,10 @@ app.get("/ladies/:service", async (req, res) => {
                 service.ladiesServices.hairTexture.smoothening
             )
         });
-        res.json({ data });
+        res.status(200).json({ data });
     }
 
-    if(service === 'hairTreatments'){
+    if(service === 'hair-treatments'){
         const hairTreatmentsServices = await AddSalon.find();
         let data = hairTreatmentsServices.filter((service)=>{
             return (
@@ -63,10 +63,10 @@ app.get("/ladies/:service", async (req, res) => {
                 service.ladiesServices.hairTreatments.scalpTreatments
             )
         });
-        res.json({ data });
+        res.status(200).json({ data });
     }
 
-    if(service === 'facialsRituals'){
+    if(service === 'facials-rituals'){
         const facialsRitualsServices = await AddSalon.find();
         let data = facialsRitualsServices.filter((service)=>{
             return (
@@ -77,10 +77,10 @@ app.get("/ladies/:service", async (req, res) => {
                 service.ladiesServices.facialsRituals.threading
             )
         });
-        res.json({ data });
+        res.status(200).json({ data });
     }
 
-    if(service === 'nailCare'){
+    if(service === 'nail-care'){
         const nailCareServices = await AddSalon.find();
         let data = nailCareServices.filter((service)=>{
             return (
@@ -89,10 +89,96 @@ app.get("/ladies/:service", async (req, res) => {
                 service.ladiesServices.nailCare.nailFilling
             )
         });
-        res.json({ data });
+        res.status(200).json({ data });
     }
 
-    res.json({ message: "No Data Found", data:[] });
+    res.status(200).json({ message: "No Data Found", data:[] });
+});
+
+app.get("/gents/:service", async (req, res) => {
+    const service = req.params.service;
+
+    if(service === 'hair-cut-finish'){
+        const hairCutFinishServices = await AddSalon.find();
+        let data = hairCutFinishServices.filter((service)=>{
+            return (
+                service.gentsServices.hairCutFinish.cutandHairCare ||
+                service.gentsServices.hairCutFinish.shampooConditioning ||
+                service.gentsServices.hairCutFinish.headMassage ||
+                service.gentsServices.hairCutFinish.beardStyling ||
+                service.gentsServices.hairCutFinish.hairBeardColouring
+            )
+        });
+        res.status(200).json({ data });
+    }
+
+    if(service === 'hair-colour'){
+        const hairColourServices = await AddSalon.find();
+        let data = hairColourServices.filter((service)=>{
+            return (
+                service.gentsServices.hairColour.hiLites ||
+                service.gentsServices.hairColour.beardColour ||
+                service.gentsServices.hairColour.hairColourAmmoniaAmmoniaFree
+            )
+        });
+        res.status(200).json({ data });
+    }
+
+    if(service === 'hair-texture'){
+        const hairTextureServices = await AddSalon.find();
+        let data = hairTextureServices.filter((service)=>{
+            return (
+                service.gentsServices.hairTexture.rebonding ||
+                service.gentsServices.hairTexture.perming ||
+                service.gentsServices.hairTexture.straightening ||
+                service.gentsServices.hairTexture.smoothening
+            )
+        });
+        res.status(200).json({ data });
+    }
+
+    if(service === 'hairTreatments'){
+        const hairTreatmentsServices = await AddSalon.find();
+        let data = hairTreatmentsServices.filter((service)=>{
+            return (
+                service.gentsServices.hairTreatments.spaTreatments ||
+                service.gentsServices.hairTreatments.volumizing ||
+                service.gentsServices.hairTreatments.advancedHairMoisturising ||
+                service.gentsServices.hairTreatments.scalpTreatments
+            )
+        });
+        res.status(200).json({ data });
+    }
+
+    if(service === 'skin-care'){
+        const skinCareServices = await AddSalon.find();
+        let data = skinCareServices.filter((service)=>{
+            return (
+                service.gentsServices.skinCare.cleanUps ||
+                service.gentsServices.skinCare.facials ||
+                service.gentsServices.skinCare.organicTreatments ||
+                service.gentsServices.skinCare.manicure ||
+                service.gentsServices.skinCare.pedicure
+            )
+        });
+        res.status(200).json({ data });
+    }
+
+    if(service === 'nail-care'){
+        const beardGroomingServices = await AddSalon.find();
+        let data = beardGroomingServices.filter((service)=>{
+            return (
+                service.gentsServices.beardGrooming.beardTrim ||
+                service.gentsServices.beardGrooming.beardColour ||
+                service.gentsServices.beardGrooming.beardStyling ||
+                service.gentsServices.beardGrooming.shave ||
+                service.gentsServices.beardGrooming.luxuryShaveBeardSpa
+            )
+        });
+        res.status(200).json({ data });
+    }
+
+    res.status(200).json({ message: "No Data Found", data:[] });
 });
 
 
@@ -105,7 +191,6 @@ app.post("/", (req, res) => {
     const phoneNumber = req.body.phoneNumber;
     const openingStatus = req.body.openingStatus;
     const address = req.body.address;
-  
     const state = req.body.state;
     const pinCode = req.body.pinCode;
     const facilities = req.body.facilities;
@@ -131,20 +216,15 @@ app.post("/", (req, res) => {
       payments,
       salonEmail,
       salonWebsite,
-      
     });
     addsalon
       .save()
       .then(() => {
-        res.json({ message: "salon data is added!", data:addsalon });
+        res.status(200).json({ message: "salon data is added!", data:addsalon });
       })
       .catch((err) => {
-        res.json(err);
+        res.status(400).json(err);
       });
   });
 
-
-  
-
-  
   module.exports=app;
