@@ -92,7 +92,7 @@ app.get("/ladies/:service", async (req, res) => {
         res.status(200).json({ data });
     }
 
-    res.status(200).json({ message: "No Data Found", data:[] });
+    // res.status(200).json({ message: "No Data Found", data:[] });
 });
 
 app.get("/gents/:service", async (req, res) => {
