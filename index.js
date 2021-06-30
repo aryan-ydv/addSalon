@@ -4,7 +4,8 @@ const cors = require("cors");
 const port = process.env.PORT || 3001;
 const UserRegistrationAndLogin=  require("./Routes/UserRegistrationAndLogin");
 const addSalonApi=require("./Routes/addSalon");
-const googlesignupApi = require("./Routes/googlesignupApi")
+const googlesignupApi = require("./Routes/googlesignupApi");
+const Branchdetails=require("./Routes/addSalonDashboard/branchDetails")
 require("dotenv").config()
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use('/UserRegistrationAndLogin',UserRegistrationAndLogin);
 app.use("/api",googlesignupApi)
 app.use("/addSalon",addSalonApi)
+app.use("/branchdetails",Branchdetails)
 
 
 app.listen(port, () => {

@@ -37,7 +37,7 @@ app.post("/login", async (req, res) => {
       process.env.JWT_SECRET
     );
 
-    return res.status(200).json({ status: "ok", token: token });
+    return res.status(200).json({ status: "ok", token: token, user: userlogin});
   }
   return res.status(401).json({
     status: "error",

@@ -181,8 +181,8 @@ app.get("/gents/:service", async (req, res) => {
     res.status(200).json({ message: "No Data Found", data:[] });
 });
 
-
-app.post("/", (req, res) => {
+app.post("/:id", (req, res) => {
+    const userId = req.params.id;
     const salonName = req.body.salonName;
     const city = req.body.city;
     const owner = req.body.owner;
@@ -200,31 +200,32 @@ app.post("/", (req, res) => {
     const salonEmail = req.body.salonEmail;
     const salonWebsite = req.body.salonWebsite;
     const addsalon = new AddSalon({
-      timings,
-      std,
-      state,
-      salonName,
-      openingStatus,
-      pinCode,
-      phoneNumber,
-      owner,
-      city,
-      facilities,
-      address,
-      ladiesServices,
-      gentsServices,
-      payments,
-      salonEmail,
-      salonWebsite,
+        userId,
+        timings,
+        std,
+        state,
+        salonName,
+        openingStatus,
+        pinCode,
+        phoneNumber,
+        owner,
+        city,
+        facilities,
+        address,
+        ladiesServices,
+        gentsServices,
+        payments,
+        salonEmail,
+        salonWebsite,
     });
     addsalon
-      .save()
-      .then(() => {
-        res.status(200).json({ message: "salon data is added!", data:addsalon });
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  });
+        .save()
+        .then(() => {
+            res.status(200).json({ message: "salon data is added!", data:addsalon });
+        })
+        .catch((err) => {
+            res.status(400).json(err);
+        });
+});
 
   module.exports=app;

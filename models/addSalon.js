@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 const addSalonSchema = new Schema({
+  userId: {type: Schema.Types.ObjectId, ref:"signup"},
   salonName: { type: String },
   city: { type: String },
   owner: { type: String },
