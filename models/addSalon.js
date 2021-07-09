@@ -2,135 +2,425 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 const addSalonSchema = new Schema({
-  salonName: { type: String },
-  city: { type: String },
-  owner: { type: String },
-  std: { type: Number },
-  phoneNumber: { type: Number },
-  openingStatus: { type: String },
-  address: { type: String },
-  state: { type: String },
-  pinCode: { type: Number },
-  facilities: {
-    ac: { type: Boolean, default: false },
-    spa: { type: Boolean, default: false },
-    sanitization: { type: Boolean, default: false },
-    valetParking: { type: Boolean, default: false },
-  },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "signup"
+    },
+    salonName: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    owner: {
+        type: String
+    },
+    std: {
+        type: Number
+    },
+    phoneNumber: {
+        type: Number
+    },
+    openingStatus: {
+        type: String
+    },
+    address: {
+        type: String
+    },
+    state: {
+        type: String
+    },
+    pinCode: {
+        type: Number
+    },
+    facilities: {
+        ac: {
+            type: Boolean,
+            default: false
+        },
+        spa: {
+            type: Boolean,
+            default: false
+        },
+        sanitization: {
+            type: Boolean,
+            default: false
+        },
+        valetParking: {
+            type: Boolean,
+            default: false
+        },
+        pickDrop: {
+            type: Boolean,
+            default: false
+        },
+        spaRooms: {
+            type: Boolean,
+            default: false
+        },
+        steam: {
+            type: Boolean,
+            default: false
+        },
+        sauna: {
+            type: Boolean,
+            default: false
+        },
+        tv: {
+            type: Boolean,
+            default: false
+        },
+        washRoom: {
+            type: Boolean,
+            default: false
+        },
+        babyCare: {
+            type: Boolean,
+            default: false
+        },
+        shower: {
+            type: Boolean,
+            default: false
+        }
+    },
 
-  ladiesServices: {
-    hairStyling: {
-      hairCut: { type: Boolean, default: false },
-      ironing: { type: Boolean, default: false },
-      globalColouring: { type: Boolean, default: false },
-      blowDry: { type: Boolean, default: false },
-      rootTouchUp: { type: Boolean, default: false },
-      shampooConditioning: { type: Boolean, default: false },
-      headMassage: { type: Boolean, default: false },
-      rollerSetting: { type: Boolean, default: false },
-      oiling: { type: Boolean, default: false },
+    ladiesServices: {
+        hairStyling: {
+            hairCut: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            ironing: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            globalColouring: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            blowDry: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            rootTouchUp: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            shampooConditioning: {
+                value:{ type : Boolean, default: true},
+                price:{ type : Number, default: 0},
+            },
+            headMassage: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            rollerSetting: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            oiling: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        makeUp: {
+            partyMakeUp: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            engagementMakeUp: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            bridalReceptionMakeUp: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            baseMakeUp: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            eyeMakeUp: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        hairTexture: {
+            rebonding: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            perming: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            keratin: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            colourProtection: {
+                value:{ type : Boolean, default: true},
+                price:{ type : Number, default: 0},
+            },
+            smoothening: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        hairTreatments: {
+            spaTreatments: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            volumizing: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            advancedHairMoisturising: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            scalpTreatments: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        facialsRituals: {
+            bleach: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            luxuryFacialsRituals: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            cleanUps: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            bodyPolishingRejuvenation: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            threading: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        handFeet: {
+            manicure: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            spaPedicure: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            pedicure: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            waxing: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            spaManicure: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        nailCare: {
+            nailPaint: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            nailArt: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            nailFilling: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        }
     },
-    makeUp: {
-      partyMakeUp: { type: Boolean, default: false },
-      engagementMakeUp: { type: Boolean, default: false },
-      bridalReceptionMakeUp: { type: Boolean, default: false },
-      baseMakeUp: { type: Boolean, default: false },
-      eyeMakeUp: { type: Boolean, default: false },
-    },
-    hairTexture: {
-      rebonding: { type: Boolean, default: false },
-      perming: { type: Boolean, default: false },
-      keratin: { type: Boolean, default: false },
-      colourProtection: { type: Boolean, default: false },
-      smoothening: { type: Boolean, default: false },
-    },
-    hairTreatments: {
-      spaTreatments: { type: Boolean, default: false },
-      volumizing: { type: Boolean, default: false },
-      advancedHairMoisturising: { type: Boolean, default: false },
-      scalpTreatments: { type: Boolean, default: false },
-    },
-    facialsRituals: {
-      bleach: { type: Boolean, default: false },
-      luxuryFacialsRituals: { type: Boolean, default: false },
-      cleanUps: { type: Boolean, default: false },
-      bodyPolishingRejuvenation: { type: Boolean, default: false },
-      threading: { type: Boolean, default: false },
-    },
-    handFeet: {
-      manicure: { type: Boolean, default: false },
-      spaPedicure: { type: Boolean, default: false },
-      pedicure: { type: Boolean, default: false },
-      waxing: { type: Boolean, default: false },
-      spaManicure: { type: Boolean, default: false },
-    },
-    nailCare: {
-      nailPaint: { type: Boolean, default: false },
-      nailArt: { type: Boolean, default: false },
-      nailFilling: { type: Boolean, default: false },
-    },
-  },
 
-  gentsServices: {
-    hairCutFinish: {
-      cutandHairCare: { type: Boolean, default: false },
-      shampooConditioning: { type: Boolean, default: false },
-      headMassage: { type: Boolean, default: false },
-      beardStyling: { type: Boolean, default: false },
-      hairBeardColouring: { type: Boolean, default: false },
+    gentsServices: {
+        hairCutFinish: {
+            cutandHairCare: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            shampooConditioning: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            headMassage: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            beardStyling: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            hairBeardColouring: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        hairColour: {
+            hiLites: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            beardColour: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            hairColourAmmoniaAmmoniaFree: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        hairTexture: {
+            straightening: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            smoothening: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            rebonding: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            perming: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        hairTreatments: {
+            hairSpa: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            advancedMoisturising: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            scalpTreatments: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            colourProtection: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        skinCare: {
+            cleanUps: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            facials: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            organicTreatments: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            manicure: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            pedicure: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        },
+        beardGrooming: {
+            beardTrim: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            beardColour: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            beardStyling: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            shave: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            },
+            luxuryShaveBeardSpa: {
+                value:{ type : Boolean, default: false},
+                price:{ type : Number, default: 0},
+            }
+        }
     },
-    hairColour: {
-      hiLites: { type: Boolean, default: false },
-      beardColour: { type: Boolean, default: false },
-      hairColourAmmoniaAmmoniaFree: { type: Boolean, default: false },
-    },
-    hairTexture: {
-      straightening: { type: Boolean, default: false },
-      smoothening: { type: Boolean, default: false },
-      rebonding: { type: Boolean, default: false },
-      perming: { type: Boolean, default: false },
-    },
-    hairTreatments: {
-      hairSpa: { type: Boolean, default: false },
-      advancedMoisturising: { type: Boolean, default: false },
-      scalpTreatments: { type: Boolean, default: false },
-      colourProtection: { type: Boolean, default: false },
-    },
-    skinCare: {
-      cleanUps: { type: Boolean, default: false },
-      facials: { type: Boolean, default: false },
-      organicTreatments: { type: Boolean, default: false },
-      manicure: { type: Boolean, default: false },
-      pedicure: { type: Boolean, default: false },
-    },
-    beardGrooming: {
-      beardTrim: { type: Boolean, default: false },
-      beardColour: { type: Boolean, default: false },
-      beardStyling: { type: Boolean, default: false },
-      shave: { type: Boolean, default: false },
-      luxuryShaveBeardSpa: { type: Boolean, default: false },
-    },
-  },
 
-  timings: {
-    monday: { type: Boolean, default: false },
-    tuesday: { type: Boolean, default: false },
-    wednesday: { type: Boolean, default: false },
-    thursday: { type: Boolean, default: false },
-    friday: { type: Boolean, default: false },
-    saturday: { type: Boolean, default: false },
-    sunday: { type: Boolean, default: false },
-    from: {type: String},
-    to: {type: String},
-  },
-  payments: {
-    debitCardsCreditCard: { type: Boolean, default: false },
-    membershipCard: { type: Boolean, default: false },
-    cashonly: { type: Boolean, default: false },
-  },
+    timings: {
+        monday: {
+            type: Boolean,
+            default: false
+        },
+        tuesday: {
+            type: Boolean,
+            default: false
+        },
+        wednesday: {
+            type: Boolean,
+            default: false
+        },
+        thursday: {
+            type: Boolean,
+            default: false
+        },
+        friday: {
+            type: Boolean,
+            default: false
+        },
+        saturday: {
+            type: Boolean,
+            default: false
+        },
+        sunday: {
+            type: Boolean,
+            default: false
+        },
+        from: {
+            type: String
+        },
+        to: {
+            type: String
+        }
+    },
+    payments: {
+        debitCardsCreditCard: {
+            type: Boolean,
+            default: false
+        },
+        membershipCard: {
+            type: Boolean,
+            default: false
+        },
+        cashonly: {
+            type: Boolean,
+            default: false
+        }
+    },
 
-  salonEmail: { type: String },
-  salonWebsite: { type: String },
+    salonEmail: {
+        type: String
+    },
+    salonWebsite: {
+        type: String
+    }
 });
 
 const Salon = mongoose.model("addSalon", addSalonSchema);

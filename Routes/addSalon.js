@@ -11,15 +11,15 @@ app.get("/ladies/:service", async (req, res) => {
         const hairStylingServices = await AddSalon.find();
         let data = hairStylingServices.filter((service)=>{
             return (
-                service.ladiesServices.hairStyling.hairCut ||
-                service.ladiesServices.hairStyling.ironing ||
-                service.ladiesServices.hairStyling.globalColouring ||
-                service.ladiesServices.hairStyling.blowDry ||
-                service.ladiesServices.hairStyling.rootTouchUp ||
-                service.ladiesServices.hairStyling.shampooConditioning ||
-                service.ladiesServices.hairStyling.headMassage ||
-                service.ladiesServices.hairStyling.rollerSetting ||
-                service.ladiesServices.hairStyling.oiling
+                service.ladiesServices.hairStyling.hairCut.value ||
+                service.ladiesServices.hairStyling.ironing.value ||
+                service.ladiesServices.hairStyling.globalColouring.value ||
+                service.ladiesServices.hairStyling.blowDry.value ||
+                service.ladiesServices.hairStyling.rootTouchUp.value ||
+                service.ladiesServices.hairStyling.shampooConditioning.value ||
+                service.ladiesServices.hairStyling.headMassage.value ||
+                service.ladiesServices.hairStyling.rollerSetting.value ||
+                service.ladiesServices.hairStyling.oiling.value
             )
         });
         res.status(200).json({ data });
@@ -29,11 +29,11 @@ app.get("/ladies/:service", async (req, res) => {
         const makeUpServices = await AddSalon.find();
         let data = makeUpServices.filter((service)=>{
             return (
-                service.ladiesServices.makeUp.partyMakeUp ||
-                service.ladiesServices.makeUp.engagementMakeUp ||
-                service.ladiesServices.makeUp.bridalReceptionMakeUp ||
-                service.ladiesServices.makeUp.baseMakeUp ||
-                service.ladiesServices.makeUp.eyeMakeUp
+                service.ladiesServices.makeUp.partyMakeUp.value ||
+                service.ladiesServices.makeUp.engagementMakeUp.value ||
+                service.ladiesServices.makeUp.bridalReceptionMakeUp.value ||
+                service.ladiesServices.makeUp.baseMakeUp.value ||
+                service.ladiesServices.makeUp.eyeMakeUp.value
             )
         });
         res.status(200).json({ data });
@@ -43,11 +43,11 @@ app.get("/ladies/:service", async (req, res) => {
         const hairTextureServices = await AddSalon.find();
         let data = hairTextureServices.filter((service)=>{
             return (
-                service.ladiesServices.hairTexture.rebonding ||
-                service.ladiesServices.hairTexture.perming ||
-                service.ladiesServices.hairTexture.keratin ||
-                service.ladiesServices.hairTexture.colourProtection ||
-                service.ladiesServices.hairTexture.smoothening
+                service.ladiesServices.hairTexture.rebonding.value ||
+                service.ladiesServices.hairTexture.perming.value ||
+                service.ladiesServices.hairTexture.keratin.value ||
+                service.ladiesServices.hairTexture.colourProtection.value ||
+                service.ladiesServices.hairTexture.smoothening.value
             )
         });
         res.status(200).json({ data });
@@ -57,10 +57,10 @@ app.get("/ladies/:service", async (req, res) => {
         const hairTreatmentsServices = await AddSalon.find();
         let data = hairTreatmentsServices.filter((service)=>{
             return (
-                service.ladiesServices.hairTreatments.spaTreatments ||
-                service.ladiesServices.hairTreatments.volumizing ||
-                service.ladiesServices.hairTreatments.advancedHairMoisturising ||
-                service.ladiesServices.hairTreatments.scalpTreatments
+                service.ladiesServices.hairTreatments.spaTreatments.value ||
+                service.ladiesServices.hairTreatments.volumizing.value ||
+                service.ladiesServices.hairTreatments.advancedHairMoisturising.value ||
+                service.ladiesServices.hairTreatments.scalpTreatments.value
             )
         });
         res.status(200).json({ data });
@@ -70,11 +70,11 @@ app.get("/ladies/:service", async (req, res) => {
         const facialsRitualsServices = await AddSalon.find();
         let data = facialsRitualsServices.filter((service)=>{
             return (
-                service.ladiesServices.facialsRituals.bleach ||
-                service.ladiesServices.facialsRituals.luxuryFacialsRituals ||
-                service.ladiesServices.facialsRituals.cleanUps ||
-                service.ladiesServices.facialsRituals.bodyPolishingRejuvenation ||
-                service.ladiesServices.facialsRituals.threading
+                service.ladiesServices.facialsRituals.bleach.value ||
+                service.ladiesServices.facialsRituals.luxuryFacialsRituals.value ||
+                service.ladiesServices.facialsRituals.cleanUps.value ||
+                service.ladiesServices.facialsRituals.bodyPolishingRejuvenation.value ||
+                service.ladiesServices.facialsRituals.threading.value
             )
         });
         res.status(200).json({ data });
@@ -84,9 +84,9 @@ app.get("/ladies/:service", async (req, res) => {
         const nailCareServices = await AddSalon.find();
         let data = nailCareServices.filter((service)=>{
             return (
-                service.ladiesServices.nailCare.nailPaint ||
-                service.ladiesServices.nailCare.nailArt ||
-                service.ladiesServices.nailCare.nailFilling
+                service.ladiesServices.nailCare.nailPaint.value ||
+                service.ladiesServices.nailCare.nailArt.value ||
+                service.ladiesServices.nailCare.nailFilling.value
             )
         });
         res.status(200).json({ data });
@@ -102,11 +102,11 @@ app.get("/gents/:service", async (req, res) => {
         const hairCutFinishServices = await AddSalon.find();
         let data = hairCutFinishServices.filter((service)=>{
             return (
-                service.gentsServices.hairCutFinish.cutandHairCare ||
-                service.gentsServices.hairCutFinish.shampooConditioning ||
-                service.gentsServices.hairCutFinish.headMassage ||
-                service.gentsServices.hairCutFinish.beardStyling ||
-                service.gentsServices.hairCutFinish.hairBeardColouring
+                service.gentsServices.hairCutFinish.cutandHairCare.value ||
+                service.gentsServices.hairCutFinish.shampooConditioning.value ||
+                service.gentsServices.hairCutFinish.headMassage.value ||
+                service.gentsServices.hairCutFinish.beardStyling.value ||
+                service.gentsServices.hairCutFinish.hairBeardColouring.value
             )
         });
         res.status(200).json({ data });
@@ -116,9 +116,9 @@ app.get("/gents/:service", async (req, res) => {
         const hairColourServices = await AddSalon.find();
         let data = hairColourServices.filter((service)=>{
             return (
-                service.gentsServices.hairColour.hiLites ||
-                service.gentsServices.hairColour.beardColour ||
-                service.gentsServices.hairColour.hairColourAmmoniaAmmoniaFree
+                service.gentsServices.hairColour.hiLites.value ||
+                service.gentsServices.hairColour.beardColour.value ||
+                service.gentsServices.hairColour.hairColourAmmoniaAmmoniaFree.value
             )
         });
         res.status(200).json({ data });
@@ -128,10 +128,10 @@ app.get("/gents/:service", async (req, res) => {
         const hairTextureServices = await AddSalon.find();
         let data = hairTextureServices.filter((service)=>{
             return (
-                service.gentsServices.hairTexture.rebonding ||
-                service.gentsServices.hairTexture.perming ||
-                service.gentsServices.hairTexture.straightening ||
-                service.gentsServices.hairTexture.smoothening
+                service.gentsServices.hairTexture.rebonding.value ||
+                service.gentsServices.hairTexture.perming.value ||
+                service.gentsServices.hairTexture.straightening.value ||
+                service.gentsServices.hairTexture.smoothening.value
             )
         });
         res.status(200).json({ data });
@@ -141,10 +141,10 @@ app.get("/gents/:service", async (req, res) => {
         const hairTreatmentsServices = await AddSalon.find();
         let data = hairTreatmentsServices.filter((service)=>{
             return (
-                service.gentsServices.hairTreatments.spaTreatments ||
-                service.gentsServices.hairTreatments.volumizing ||
-                service.gentsServices.hairTreatments.advancedHairMoisturising ||
-                service.gentsServices.hairTreatments.scalpTreatments
+                service.gentsServices.hairTreatments.spaTreatments.value ||
+                service.gentsServices.hairTreatments.volumizing.value ||
+                service.gentsServices.hairTreatments.advancedHairMoisturising.value ||
+                service.gentsServices.hairTreatments.scalpTreatments.value
             )
         });
         res.status(200).json({ data });
@@ -154,11 +154,11 @@ app.get("/gents/:service", async (req, res) => {
         const skinCareServices = await AddSalon.find();
         let data = skinCareServices.filter((service)=>{
             return (
-                service.gentsServices.skinCare.cleanUps ||
-                service.gentsServices.skinCare.facials ||
-                service.gentsServices.skinCare.organicTreatments ||
-                service.gentsServices.skinCare.manicure ||
-                service.gentsServices.skinCare.pedicure
+                service.gentsServices.skinCare.cleanUps.value ||
+                service.gentsServices.skinCare.facials.value ||
+                service.gentsServices.skinCare.organicTreatments.value ||
+                service.gentsServices.skinCare.manicure.value ||
+                service.gentsServices.skinCare.pedicure.value
             )
         });
         res.status(200).json({ data });
@@ -168,11 +168,11 @@ app.get("/gents/:service", async (req, res) => {
         const beardGroomingServices = await AddSalon.find();
         let data = beardGroomingServices.filter((service)=>{
             return (
-                service.gentsServices.beardGrooming.beardTrim ||
-                service.gentsServices.beardGrooming.beardColour ||
-                service.gentsServices.beardGrooming.beardStyling ||
-                service.gentsServices.beardGrooming.shave ||
-                service.gentsServices.beardGrooming.luxuryShaveBeardSpa
+                service.gentsServices.beardGrooming.beardTrim.value ||
+                service.gentsServices.beardGrooming.beardColour.value ||
+                service.gentsServices.beardGrooming.beardStyling.value ||
+                service.gentsServices.beardGrooming.shave.value ||
+                service.gentsServices.beardGrooming.luxuryShaveBeardSpa.value
             )
         });
         res.status(200).json({ data });
@@ -181,8 +181,8 @@ app.get("/gents/:service", async (req, res) => {
     res.status(200).json({ message: "No Data Found", data:[] });
 });
 
-
-app.post("/", (req, res) => {
+app.post("/:id", (req, res) => {
+    const userId = req.params.id;
     const salonName = req.body.salonName;
     const city = req.body.city;
     const owner = req.body.owner;
@@ -200,31 +200,32 @@ app.post("/", (req, res) => {
     const salonEmail = req.body.salonEmail;
     const salonWebsite = req.body.salonWebsite;
     const addsalon = new AddSalon({
-      timings,
-      std,
-      state,
-      salonName,
-      openingStatus,
-      pinCode,
-      phoneNumber,
-      owner,
-      city,
-      facilities,
-      address,
-      ladiesServices,
-      gentsServices,
-      payments,
-      salonEmail,
-      salonWebsite,
+        userId,
+        timings,
+        std,
+        state,
+        salonName,
+        openingStatus,
+        pinCode,
+        phoneNumber,
+        owner,
+        city,
+        facilities,
+        address,
+        ladiesServices,
+        gentsServices,
+        payments,
+        salonEmail,
+        salonWebsite,
     });
     addsalon
-      .save()
-      .then(() => {
-        res.status(200).json({ message: "salon data is added!", data:addsalon });
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  });
+        .save()
+        .then(() => {
+            res.status(200).json({ message: "salon data is added!", data:addsalon });
+        })
+        .catch((err) => {
+            res.status(400).json(err);
+        });
+});
 
   module.exports=app;
