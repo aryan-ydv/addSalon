@@ -17,6 +17,7 @@ const Services = require("./Routes/addSalonDashboard/services")
 const UserMakeupConsultant = require("./Routes/userDashBoard/makeupConsultant")
 const ReferAndEarn = require("./Routes/userDashBoard/referandEarn")
 const SubmitReview = require("./Routes/userDashBoard/submitReview")
+const requireSignIn = require("./auth/requireSignIn")
 
 require("dotenv").config()
 const app = express();
@@ -39,7 +40,7 @@ app.use("/amenties", Amenties)
 app.use("/timings", Timings)
 app.use("/services", Services)
 app.use("/usermakeup", UserMakeupConsultant)
-app.use("/referandearn", ReferAndEarn)
+app.use("/referandearn", requireSignIn, ReferAndEarn)
 app.use("/submitreview", SubmitReview)
 
 app.listen(port, () => {
