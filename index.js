@@ -18,7 +18,7 @@ const UserMakeupConsultant = require("./Routes/userDashBoard/makeupConsultant")
 const ReferAndEarn = require("./Routes/userDashBoard/referandEarn")
 const SubmitReview = require("./Routes/userDashBoard/submitReview")
 const requireSignIn = require("./auth/requireSignIn")
-
+const Payment = require("./Routes/payment")
 
 require("dotenv").config()
 const app = express();
@@ -43,6 +43,7 @@ app.use("/services", Services)
 app.use("/usermakeup", UserMakeupConsultant)
 app.use("/referandearn", ReferAndEarn)
 app.use("/submitreview", SubmitReview)
+app.use("/payment", Payment)
 
 
 app.listen(port, () => {
